@@ -3,3 +3,5 @@ This is just a test file.
 Forgot to push the script to the private repo. trying again in this commit.
 
 Added the permission to make comments. trying again.
+
+Asking for write permissions to contents
