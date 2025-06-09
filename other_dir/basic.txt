@@ -1,0 +1,1 @@
+Making sure that it doesn't make comment when there is a change on a different branch
