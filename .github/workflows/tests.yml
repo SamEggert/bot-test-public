@@ -10,7 +10,7 @@ on:
 
 # Add permissions for the GITHUB_TOKEN
 permissions:
-  contents: read      # Allow reading repository contents
+  contents: write     # Allow writing to repository contents (needed for commit comments)
   pull-requests: write # Allow writing to pull requests (if needed)
   issues: write       # Allow writing to issues
   repository-projects: write # Allow writing to repository projects
