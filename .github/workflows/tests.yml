@@ -8,6 +8,13 @@ on:
     paths:
       - "locadex/**"
 
+# Add permissions for the GITHUB_TOKEN
+permissions:
+  contents: read      # Allow reading repository contents
+  pull-requests: write # Allow writing to pull requests (if needed)
+  issues: write       # Allow writing to issues
+  repository-projects: write # Allow writing to repository projects
+
 jobs: 
   run-script-and-comment:
     runs-on: ubuntu-latest
