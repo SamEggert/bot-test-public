@@ -7,3 +7,5 @@ Added the permission to make comments. trying again.
 Asking for write permissions to contents
 
 Trying with github app now.
+
+fixed yml, trying this
