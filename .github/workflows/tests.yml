@@ -11,13 +11,21 @@ jobs:
   run-script-and-comment:
     runs-on: ubuntu-latest
     steps:
+      # Debug: Check APP_ID
+      - name: Debug App ID
+        run: |
+          echo "App ID: ${{ secrets.APP_ID }}"
+          echo "App ID length: ${#APP_ID}"
+        env:
+          APP_ID: ${{ secrets.APP_ID }}
+
       # Step 1: Generate App Token
       - name: Generate App Token
         id: generate_token
         uses: actions/create-github-app-token@v1
         with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
           repositories: |
             bot-test-public
             grader-bot-test
