@@ -26,9 +26,6 @@ jobs:
         with:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
-          repositories: |
-            bot-test-public
-            grader-bot-test
 
       # Step 1.5: Debug - Test the token
       - name: Test GitHub App Token
