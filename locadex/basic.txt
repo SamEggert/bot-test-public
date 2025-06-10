@@ -21,3 +21,6 @@ explicitly state the branch for private repo
 debugging step again
 
 reinstalled
+
+explicitly set repos
+and add issue write
