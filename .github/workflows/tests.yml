@@ -19,6 +19,14 @@ jobs:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
+      # Step 1.5: Debug - Test the token
+      - name: Test GitHub App Token
+        run: |
+          echo "Testing token access..."
+          curl -H "Authorization: token ${{ steps.generate_token.outputs.token }}" \
+              -H "Accept: application/vnd.github.v3+json" \
+              https://api.github.com/repos/SamEggert/grader-bot-test
+
       # Step 2: Checkout the public production repo using the App's token
       - name: Checkout Production Code
         uses: actions/checkout@v4
