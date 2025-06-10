@@ -28,3 +28,5 @@ and add issue write
 debugging secrets
 
 remove explicit repos
+
+re-defined the app id and app private key

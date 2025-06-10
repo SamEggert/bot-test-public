@@ -19,6 +19,15 @@ jobs:
         env:
           APP_ID: ${{ secrets.APP_ID }}
 
+      # Test: Check if app is installed
+      - name: Test App Installation
+        run: |
+          echo "Checking app installation..."
+          # This should return 200 if app is properly installed
+          curl -v -H "Accept: application/vnd.github.v3+json" \
+               -H "User-Agent: GitHub-Actions" \
+               "https://api.github.com/repos/SamEggert/bot-test-public/installation" || echo "Installation check failed"
+
       # Step 1: Generate App Token
       - name: Generate App Token
         id: generate_token
