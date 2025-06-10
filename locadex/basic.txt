@@ -30,3 +30,5 @@ debugging secrets
 remove explicit repos
 
 re-defined the app id and app private key
+
+more debug for private

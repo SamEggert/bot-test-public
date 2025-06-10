@@ -35,11 +35,19 @@ jobs:
         with:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          repositories: |
+            bot-test-public
+            grader-bot-test
 
       # Step 1.5: Debug - Test the token
       - name: Test GitHub App Token
         run: |
           echo "Testing token access..."
+          echo "Testing public repo access:"
+          curl -H "Authorization: token ${{ steps.generate_token.outputs.token }}" \
+              -H "Accept: application/vnd.github.v3+json" \
+              https://api.github.com/repos/SamEggert/bot-test-public
+          echo -e "\n\nTesting private repo access:"
           curl -H "Authorization: token ${{ steps.generate_token.outputs.token }}" \
               -H "Accept: application/vnd.github.v3+json" \
               https://api.github.com/repos/SamEggert/grader-bot-test
