@@ -40,11 +40,7 @@ jobs:
       - name: Run Script and Capture Output
         id: run-script
         run: |
-          chmod +x private-repo/my_cli.sh
-          output=$(./private-repo/my_cli.sh --target ./production-repo 2>&1)
-          echo "script_output<<EOF" >> $GITHUB_OUTPUT
-          echo "$output" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          npx tsx private-repo/src/index.ts -k ${{ secrets.ANTHROPIC_API_KEY }}
 
       # Step 5: Post comment on the commit
       - name: Comment on Commit
