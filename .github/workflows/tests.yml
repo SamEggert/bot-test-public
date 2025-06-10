@@ -4,30 +4,11 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "locadex/**"
 
 jobs: 
   run-script-and-comment:
     runs-on: ubuntu-latest
     steps:
-      # Debug: Check APP_ID
-      - name: Debug App ID
-        run: |
-          echo "App ID: ${{ secrets.APP_ID }}"
-          echo "App ID length: ${#APP_ID}"
-        env:
-          APP_ID: ${{ secrets.APP_ID }}
-
-      # Test: Check if app is installed
-      - name: Test App Installation
-        run: |
-          echo "Checking app installation..."
-          # This should return 200 if app is properly installed
-          curl -v -H "Accept: application/vnd.github.v3+json" \
-               -H "User-Agent: GitHub-Actions" \
-               "https://api.github.com/repos/SamEggert/bot-test-public/installation" || echo "Installation check failed"
-
       # Step 1: Generate App Token
       - name: Generate App Token
         id: generate_token
@@ -39,19 +20,6 @@ jobs:
             bot-test-public
             grader-bot-test
 
-      # Step 1.5: Debug - Test the token
-      - name: Test GitHub App Token
-        run: |
-          echo "Testing token access..."
-          echo "Testing public repo access:"
-          curl -H "Authorization: token ${{ steps.generate_token.outputs.token }}" \
-              -H "Accept: application/vnd.github.v3+json" \
-              https://api.github.com/repos/SamEggert/bot-test-public
-          echo -e "\n\nTesting private repo access:"
-          curl -H "Authorization: token ${{ steps.generate_token.outputs.token }}" \
-              -H "Accept: application/vnd.github.v3+json" \
-              https://api.github.com/repos/SamEggert/grader-bot-test
-
       # Step 2: Checkout the public production repo using the App's token
       - name: Checkout Production Code
         uses: actions/checkout@v4
@@ -62,12 +30,11 @@ jobs:
       # Step 3: Checkout the private test repo using the SAME App's token
       - name: Checkout Private Script Repo
         uses: actions/checkout@v4
-        timeout-minutes: 5  # Add timeout to prevent hanging
         with:
           repository: SamEggert/grader-bot-test
           path: private-repo
           token: ${{ steps.generate_token.outputs.token }}
-          ref: main  # Explicitly specify the branch
+          ref: main
 
       # Step 4: Run your private script
       - name: Run Script and Capture Output
