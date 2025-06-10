@@ -26,3 +26,5 @@ explicitly set repos
 and add issue write
 
 debugging secrets
+
+remove explicit repos
